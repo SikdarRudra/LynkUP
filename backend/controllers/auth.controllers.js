@@ -1,3 +1,4 @@
+import { mongo } from "mongoose";
 import sendMail from "../config/Mail.js";
 import genToken from "../config/token.js";
 import User from "../models/user.model.js";
@@ -79,7 +80,12 @@ export const signOut = async (req, res) => {
     res.clearCookie("token");
     return res.status(200).json({ message: "sign out successfully" });
   } catch (error) {
-    return res.status(500).json({ message: `signout error ${error}` });
+    return res
+      .status(500)
+      .json({
+        message: `signout error ${error}`,
+        mongoUrl: process.env.MONGODB_URL,
+      });
   }
 };
 

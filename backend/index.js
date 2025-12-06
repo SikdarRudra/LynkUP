@@ -37,6 +37,15 @@ app.use("/api/loop", loopRouter);
 app.use("/api/story", storyRouter);
 app.use("/api/message", messageRouter);
 
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    message: JSON.stringify(err.s),
+    tack: err.stack,
+
+    mongoUrl: process.env.MONGODB_URL,
+  });
+});
 server.listen(port, () => {
   console.log(`server started at http://localhost:${port}`);
 });

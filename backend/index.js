@@ -18,6 +18,7 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+connectDb();
 
 const port = process.env.PORT || 5000;
 app.use(
@@ -37,6 +38,5 @@ app.use("/api/story", storyRouter);
 app.use("/api/message", messageRouter);
 
 server.listen(port, () => {
-  connectDb();
   console.log(`server started at http://localhost:${port}`);
 });

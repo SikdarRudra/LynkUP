@@ -3,6 +3,7 @@ import sendMail from "../config/Mail.js";
 import genToken from "../config/token.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
+
 export const signUp = async (req, res) => {
   try {
     const { name, email, password, userName } = req.body;
@@ -71,12 +72,10 @@ export const signIn = async (req, res) => {
 
     return res.status(200).json(user);
   } catch (error) {
-    return res
-      .status(500)
-      .json({
-        message: `signin error ${error}`,
-        mongoUrl: process.env.MONGODB_URL,
-      });
+    return res.status(500).json({
+      message: `signin error`,
+      mongoUrl: process.env.MONGODB_URL,
+    });
   }
 };
 
